@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import data from "./quiz.json";
+import Quiz from "./components/Quiz";
+import { useState } from "react";
+import Result from "./components/Result";
+import Start from "./components/Start";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [isPlaying, setIsPlaying] = useState(false);
+	const [score, setScore] = useState(0);
+	const [questionIndex, setQuestionIndex] = useState(0);
+
+	let numberOfQuestions = data.questions.length;
+
+	function play() {
+		setIsPlaying(true);
+	}
+
+	function addScore(addedScore) {
+		setScore(score + addedScore);
+
+		// Go to next question
+		if (questionIndex < numberOfQuestions - 1) {
+			setQuestionIndex(questionIndex + 1);
+		}
+	}
+
+	if (!isPlaying) {
+		return <Start play={play} />;
+	}
+	if (questionIndex === numberOfQuestions - 1) {
+		return <Result score={score} />;
+	} else {
+		return (
+			<Quiz
+				question={data.questions[questionIndex]}
+				addScore={addScore}
+				progress={questionIndex / numberOfQuestions}
+			/>
+		);
+	}
 }
 
 export default App;

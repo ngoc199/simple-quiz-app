@@ -1,0 +1,29 @@
+h1 {
+	font-family: cursive;
+	text-align: center;
+	font-size: 4rem;
+	font-weight: 700;
+}
+
+button {
+	border: none;
+	color: #fff;
+	background-color: blue;
+	transition: 0.2s ease-in;
+	cursor: pointer;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 2.5rem;
+	display: block;
+	margin: 0 auto;
+	padding: 0.35rem 1.5rem;
+}
+
+button:hover {
+	background-color: green;
+}
+
+@media (max-width: 765px) {
+	h1 {
+		font-size: 3.5rem;
+	}
+}
